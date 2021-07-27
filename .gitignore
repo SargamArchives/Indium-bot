@@ -1,0 +1,14 @@
+# Environment Variable
+.env
+
+#Pip files
+Pipfile
+Pipfile.lock
+
+#pycache
+/__pycache__
+
+/cogs/__pycache__
+
+pp_size.py
+rps.py

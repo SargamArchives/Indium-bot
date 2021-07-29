@@ -11,6 +11,7 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 intents = discord.Intents(messages=True, guilds=True,
                           reactions=True, members=True, presences=True)
 client = commands.Bot(command_prefix=">", intents=intents)
+client.load_extension("jishaku")
 
 
 for filename in os.listdir("./cogs"):

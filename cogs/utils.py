@@ -24,8 +24,9 @@ class Utilis(commands.Cog):
         avatar_embed = discord.Embed(
             title=f"{user.name}#{user.discriminator}\nAvatar"
         )
-        avatar_embed.set_image(url = url)
+        avatar_embed.set_image(url=url)
         await ctx.send(embed=avatar_embed)
+
 
 def setup(client):
     client.add_cog(Utilis(client))

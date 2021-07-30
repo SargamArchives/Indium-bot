@@ -12,7 +12,7 @@ from discord.ext.commands.core import command
 from dotenv import load_dotenv
 
 
-class Fun(commands.Cog):
+class Miscellaneous(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -78,4 +78,4 @@ class Fun(commands.Cog):
                 await ctx.send(embed=covid_embed)
 
 def setup(client):
-    client.add_cog(Fun(client))
+    client.add_cog(Miscellaneous(client))

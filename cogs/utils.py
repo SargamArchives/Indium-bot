@@ -28,5 +28,7 @@ class Utilis(commands.Cog):
         await ctx.send(embed=avatar_embed)
 
 
+
+
 def setup(client):
     client.add_cog(Utilis(client))

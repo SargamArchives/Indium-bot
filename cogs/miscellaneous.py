@@ -58,7 +58,7 @@ class Fun(commands.Cog):
                     url=f"https://flagcdn.com/256x192/{flag}.png")
                 await ctx.send(embed=country_embed)
 
-    @commands.command(name="covid")
+    @commands.command(name="covid") #TODO This code doesn't work well
     async def corona(self, ctx, country="nepal"):
         URL = f"https://api.covid19api.com/live/country/{country}/status/confirmed"
         async with request("GET", URL) as response:

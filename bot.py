@@ -1,11 +1,8 @@
 import os
-from dotenv import load_dotenv
 import discord
 from discord.ext import commands
+from config import BOT_TOKEN
 
-
-load_dotenv()
-BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 
 intents = discord.Intents(messages=True, guilds=True,

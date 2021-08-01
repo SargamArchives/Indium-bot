@@ -26,4 +26,13 @@ extensions = [
 for ext in extensions:
     client.load_extension(ext)
 
+
+@client.command()
+async def reload(ctx, cog):
+    if ctx.message.author.id == 625651629743407104:
+        client.reload_extension(f"cogs.{cog}")
+        await ctx.send(f"reloaded cogs.{cog}")
+    else:
+        pass
+
 client.run(BOT_TOKEN)

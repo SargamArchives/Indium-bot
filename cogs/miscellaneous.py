@@ -25,7 +25,7 @@ class Miscellaneous(commands.Cog):
         async with request("GET", URL, headers={}) as response:
             if response.status == 200:
                 data = await response.json()
-                weather_data = data["weather"]
+                weather_data = data["weather"] 
                 wind_data = data["wind"]
                 weather = discord.Embed(
                     title=f"Weather report: {name}",

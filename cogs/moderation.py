@@ -4,7 +4,7 @@ from discord import reaction
 from discord.embeds import Embed
 from discord.ext import commands
 from discord.ext.commands.core import command
-
+from asyncio import sleep
 
 class Moderation(commands.Cog):
     def __init__(self, client):
@@ -20,7 +20,7 @@ class Moderation(commands.Cog):
         )
         await ctx.message.delete()
         await ctx.channel.send(embed=kick)
-        await user.send("message aayo?")
+        await user.send(embed=kick)
 
         
     @commands.command()
@@ -31,8 +31,11 @@ class Moderation(commands.Cog):
             title=f":hammer: Banned {user.name}!",
             description=f"Reson: {reason}\nBy: {ctx.author.mention}"
         )
-        await ctx.send(embed=ban)
+
+        message = await ctx.send(embed=ban)
         await user.send(embed=ban)
+        await sleep(10)
+        await message.delete()
 
 
     @commands.command()
@@ -43,7 +46,9 @@ class Moderation(commands.Cog):
             title=f"Message deleted",
             description=f"{amount} message deleted by {ctx.author.mention}"
         )
-        await ctx.channel.send(embed=purge)
+        message = await ctx.channel.send(embed=purge)
+        await sleep(5)
+        await message.delete()
 
 
 

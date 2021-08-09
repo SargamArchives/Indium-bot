@@ -41,6 +41,9 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     async def purge(self, ctx,  amount=2):
+        if amount < 1:
+            return
+
         await ctx.channel.purge(limit=amount + 1)
         purge = discord.Embed(
             title=f"Message deleted",
@@ -49,10 +52,6 @@ class Moderation(commands.Cog):
         message = await ctx.channel.send(embed=purge)
         await sleep(5)
         await message.delete()
-
-
-
-
 
 
 def setup(client):

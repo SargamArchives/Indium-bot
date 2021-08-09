@@ -23,7 +23,7 @@ extensions = [
     "cogs.miscellaneous",
     "cogs.moderation",
     "cogs.utils",
-]
+    ]
 
 for ext in extensions:
     client.load_extension(ext)

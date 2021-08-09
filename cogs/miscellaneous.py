@@ -1,9 +1,9 @@
 from itertools import count
 from logging import captureWarnings
 from os import getenv
+from discord.embeds import Embed
 from dotenv.main import with_warn_for_invalid_lines
 
-from yarl import URL
 from utils import CountryResponse
 import discord
 from discord.ext import commands
@@ -57,6 +57,11 @@ class Miscellaneous(commands.Cog):
                 country_embed.set_image(
                     url=f"https://flagcdn.com/256x192/{flag}.png")
                 await ctx.send(embed=country_embed)
+            else:
+                covid_embed = discord.Embed(
+                description=f"Couldnot find about your country:😢 {country}"
+                )
+                await ctx.send(embed=covid_embed)
 
     @commands.command(name="covid") #TODO This code doesn't work well
     async def corona(self, ctx, country="nepal"):
@@ -73,9 +78,10 @@ class Miscellaneous(commands.Cog):
                     description=f"**Total Confirmed**: {Confirmed}\n**Total Deaths**: {Deaths}\n**Total Active**: {Active}"
                 )
                 covid_embed.set_image(
-                    url="https://www.shorturl.at/osCH3"
+                    url="https://www.fda.gov/files/Coronavirus_3D_illustration_by_CDC_1600x900.png"
                 )
                 await ctx.send(embed=covid_embed)
+
 
 def setup(client):
     client.add_cog(Miscellaneous(client))

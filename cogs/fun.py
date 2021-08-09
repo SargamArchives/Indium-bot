@@ -1,3 +1,4 @@
+from inspect import ClosureVars
 from cogs.utils import Utilis
 import discord
 from discord.ext import commands
@@ -10,11 +11,10 @@ class Fun(commands.Cog):
     @commands.command()
     async def pp(self, ctx, user: discord.Member = None):
         if user == None: user = ctx.author
-        # pp_str = "8"
-        # for _ in range(randrange(10)):
-        #     pp_str += "="
-        # pp_str += "D"
-        pp_str = ""
+        pp_str = "8"
+        for _ in range(randrange(10)):
+            pp_str += "="
+        pp_str += "D"
         pp_embed = discord.Embed(
             title="PP size machine",
             description=f"{user.name}'s pp size:\n {pp_str}"

@@ -18,7 +18,7 @@ class Miscellaneous(commands.Cog):
         ping = round(self.client.latency * 1000)
         ping_embed = discord.Embed(
             title=f"pong🏓",
-            description=f"{ping}"
+            description=f"{ping}ms"
         )
         await ctx.send(embed=ping_embed)
 

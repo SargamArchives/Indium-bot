@@ -1,5 +1,3 @@
-from inspect import ClosureVars
-from cogs.utils import Utilis
 import discord
 from discord.ext import commands
 from random import randrange

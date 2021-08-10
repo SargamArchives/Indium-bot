@@ -17,6 +17,24 @@ class Miscellaneous(commands.Cog):
         self.client = client
 
     @commands.command()
+    async def ping(self, ctx):
+        ping = round(self.client.latency * 1000)
+        ping_embed = discord.Embed(
+            title=f"pong🏓",
+            description=f"{ping}"
+        )
+        await ctx.send(embed=ping_embed)
+
+    @commands.command(name="av")
+    async def avatar(self, ctx, user: discord.Member = None):
+        if user == None: user = ctx.author
+        avatar_embed = discord.Embed(
+            title=f"{user.name}#{user.discriminator}\nAvatar"
+        )
+        avatar_embed.set_image(url=user.avatar_url)
+        await ctx.send(embed=avatar_embed)
+
+    @commands.command()
     async def weather(self, ctx, name="nepal"):
         load_dotenv()
         api_key = getenv("API_KEY")

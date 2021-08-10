@@ -1,16 +1,13 @@
 from itertools import count
 from logging import captureWarnings
-from os import getenv
 from discord.embeds import Embed
-from dotenv.main import with_warn_for_invalid_lines
 
 from utils import CountryResponse
 import discord
 from discord.ext import commands
 from aiohttp import request
 from discord.ext.commands.core import command
-from dotenv import load_dotenv
-
+from config import API_KEY
 
 class Miscellaneous(commands.Cog):
     def __init__(self, client):
@@ -36,8 +33,7 @@ class Miscellaneous(commands.Cog):
 
     @commands.command()
     async def weather(self, ctx, name="nepal"):
-        load_dotenv()
-        api_key = getenv("API_KEY")
+        api_key = API_KEY
         URL = f"https://api.openweathermap.org/data/2.5/weather?q={name}&appid={api_key}&units=metric"
 
         async with request("GET", URL, headers={}) as response:

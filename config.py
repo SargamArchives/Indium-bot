@@ -4,7 +4,7 @@ import dotenv
 dotenv.load_dotenv()
 
 
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-API_KEY = os.getenv("API_KEY")
-ID1 = int(os.getenv("ID1"))
-ID2 = int(os.getenv("ID2"))
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
+API_KEY = os.environ.get("API_KEY")
+ID1 = int(os.environ.get("ID1"))
+ID2 = int(os.environ.get("ID2"))

@@ -1,10 +1,12 @@
 from itertools import count
 from logging import captureWarnings
+from os import name
 from discord.embeds import Embed
 
 from utils import CountryResponse
 import discord
 from discord.ext import commands
+from asyncio import sleep
 from aiohttp import request
 from discord.ext.commands.core import command
 from config import API_KEY
@@ -96,6 +98,37 @@ class Miscellaneous(commands.Cog):
                 )
                 await ctx.send(embed=covid_embed)
 
+    @commands.command(aliases=["compile","run"])
+    async def code_compile(self,ctx,*, code):
+        print("running")
+        code = code.lower().strip("`")
+        print(code)
+        index = code.find("\n")
+        lang = ""
+        for i in range(index):
+            lang += code[i]
+        code = code.strip(f"{lang}\n")
+        
+        data = {
+            "language": lang,
+            "source": f"{code}"
+        }
+        URL = "https://emkc.org/api/v1/piston/execute"
+        async with request("POST",URL, data = data) as response:
+            if response.status == 200:
+                data = await response.json()
+                if data["ran"]:
+                    print(data)
+                    code_embed = discord.Embed(
+                        title=f"Ran your {data['language']} code \nin version {data['version']}",
+                        description=f"Output\n`{data['output']}`"
+                    )
+                    await ctx.send(embed=code_embed)
+            else:
+                m = await ctx.send("**oh no**\nCould not compile your code! :(")
+                await sleep(5)
+                await m.delete()
 
+                
 def setup(client):
     client.add_cog(Miscellaneous(client))

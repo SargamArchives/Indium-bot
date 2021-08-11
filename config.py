@@ -1,7 +1,10 @@
 import os
-# import dotenv
 
-# dotenv.load_dotenv()
+try:
+    import dotenv
+    dotenv.load_dotenv()
+except:
+    pass
 
 
 BOT_TOKEN = os.environ.get("BOT_TOKEN")

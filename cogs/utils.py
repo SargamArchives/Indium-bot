@@ -16,6 +16,13 @@ class Utilis(commands.Cog):
         client.launch_time = datetime.utcnow()
         self.owner_id = [ID1, ID2]
 
+    @commands.command()
+    async def on_message(ctx, *, mention):
+        if mention == "<@861148454294519828>":
+            print("My default prfix is > or ")
+
+
+
     @commands.Cog.listener()
     async def on_ready(self):
         self.change_status.start()

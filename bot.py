@@ -1,5 +1,8 @@
 import discord
+from discord import message
 from discord.ext import commands
+from discord.ext.commands import bot
+from discord.ext.commands.bot import when_mentioned
 from config import BOT_TOKEN, ID1, ID2
 
 OWNER_ID = [ID1, ID2]
@@ -13,7 +16,7 @@ intents = discord.Intents(
                         )
 
 client = commands.Bot(
-                    command_prefix=">",
+                    command_prefix=commands.when_mentioned_or(">"),
                     intents=intents
                     )
 
@@ -23,6 +26,7 @@ extensions = [
     "cogs.miscellaneous",
     "cogs.moderation",
     "cogs.utils",
+    "cogs.error"
     ]
 
 for ext in extensions:

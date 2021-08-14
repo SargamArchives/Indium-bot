@@ -20,7 +20,7 @@ class Utilis(commands.Cog):
         self.change_status.start()
         print("Logged in as bot")
 
-    @tasks.loop(seconds=5)
+    @tasks.loop(seconds=10)
     async def change_status(self):
         await self.client.change_presence(activity=discord.Game(next(self.status)))
 

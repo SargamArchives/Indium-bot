@@ -1,6 +1,4 @@
-from bot import OWNER_ID
 import discord
-from discord import message
 from discord.ext import commands, tasks
 from itertools import cycle
 from datetime import datetime
@@ -10,17 +8,11 @@ class Utilis(commands.Cog):
     def __init__(self, client):
         self.client = client
         self.status = cycle(
-            ["minecraft",
-             "among us"]
-        )
+                            ["minecraft",
+                           "among us"]
+                            )
         client.launch_time = datetime.utcnow()
         self.owner_id = [ID1, ID2]
-
-    @commands.command()
-    async def on_message(ctx, *, mention):
-        if mention == "<@861148454294519828>":
-            print("My default prfix is > or ")
-
 
 
     @commands.Cog.listener()

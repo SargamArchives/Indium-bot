@@ -19,5 +19,8 @@ class Fun(commands.Cog):
         )
         await ctx.send(embed=pp_embed)
 
+    @commands.Cog.listener()
+    async def on_message():
+
 def setup(client):
     client.add_cog(Fun(client))

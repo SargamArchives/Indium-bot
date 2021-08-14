@@ -1,9 +1,5 @@
 import discord
-from discord import guild
-from discord import reaction
-from discord.embeds import Embed
 from discord.ext import commands
-from discord.ext.commands.core import command
 from asyncio import sleep
 
 class Moderation(commands.Cog):
@@ -40,9 +36,12 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
-    async def purge(self, ctx,  amount=2):
+    async def purge(self, ctx,  amount, user: discord.Member):
         if amount < 1:
             return
+        if user:
+            # todo make this better 
+            pass
 
         await ctx.channel.purge(limit=amount + 1)
         purge = discord.Embed(

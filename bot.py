@@ -1,19 +1,11 @@
 import discord
-from discord import message
 from discord.ext import commands
-from discord.ext.commands import bot
-from discord.ext.commands.bot import when_mentioned
+
 from config import BOT_TOKEN, ID1, ID2
 
 OWNER_ID = [ID1, ID2]
 
-intents = discord.Intents(
-                        messages=True,
-                        guilds=True,
-                        reactions=True,
-                        members=True,
-                        presences=True
-                        )
+intents = discord.Intents.all()
 
 client = commands.Bot(
                     command_prefix=commands.when_mentioned_or(">"),
@@ -23,7 +15,7 @@ client = commands.Bot(
 extensions = [
     "jishaku",
     "cogs.fun",
-    "cogs.miscellaneous",
+    "cogs.misc",
     "cogs.moderation",
     "cogs.utils",
     "cogs.error"

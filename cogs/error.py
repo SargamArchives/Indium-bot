@@ -5,8 +5,6 @@ from discord.ext.commands import cog
 
 class Error(commands.Cog):
     
-    
-    
     # @commands.Cog.listener()
     # async def on_command_error(ctx, error):
     #     print("error")

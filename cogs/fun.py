@@ -2,16 +2,19 @@ import discord
 from discord.ext import commands
 from random import randrange
 from datetime import date
+from discord.ext.commands.core import command
 
 from multidict import CIMultiDict
 
+
 class Fun(commands.Cog):
-    def __init__(self, client):
+    def __init__(self, client) -> None:
         self.client = client
 
     @commands.command()
-    async def pp(self, ctx, user: discord.Member = None):
-        if user == None: user = ctx.author
+    async def pp(self, ctx, user: discord.Member = None) -> None:
+        if user == None:
+            user = ctx.author
         pp_str = "8"
         for _ in range(randrange(10)):
             pp_str += "="
@@ -23,8 +26,9 @@ class Fun(commands.Cog):
         await ctx.send(embed=pp_embed)
 
     @commands.command()
-    async def date(self, ctx):
+    async def date(self, ctx: commands.context) -> None:
         await ctx.reply(date.today())
+
 
 def setup(client):
     client.add_cog(Fun(client))

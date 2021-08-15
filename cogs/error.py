@@ -11,6 +11,9 @@ import traceback
 
 
 class Error(commands.Cog):
+    """
+    
+    """
     @commands.Cog.listener()
     async def on_command_error(self,ctx: commands.Context, error: commands.CommandError) -> None:
         if isinstance(error, CommandNotFound):

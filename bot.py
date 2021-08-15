@@ -23,7 +23,7 @@ extensions = [
     "cogs.misc",
     "cogs.moderation",
     "cogs.utils",
-    "cogs.error"
+    "cogs.error",
 ]
 
 for ext in extensions:

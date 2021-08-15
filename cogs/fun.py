@@ -1,6 +1,9 @@
 import discord
 from discord.ext import commands
 from random import randrange
+from datetime import date
+
+from multidict import CIMultiDict
 
 class Fun(commands.Cog):
     def __init__(self, client):
@@ -18,6 +21,10 @@ class Fun(commands.Cog):
             description=f"{user.name}'s pp size:\n {pp_str}"
         )
         await ctx.send(embed=pp_embed)
+
+    @commands.command()
+    async def date(self, ctx):
+        await ctx.reply(date.today())
 
 def setup(client):
     client.add_cog(Fun(client))

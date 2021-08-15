@@ -1,4 +1,5 @@
 import discord
+from discord import channel
 from discord.ext import commands
 from asyncio import sleep
 
@@ -36,13 +37,9 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
-    async def purge(self, ctx,  amount, user: discord.Member):
+    async def purge(self, ctx,  amount: int):
         if amount < 1:
             return
-        if user:
-            # todo make this better 
-            pass
-
         await ctx.channel.purge(limit=amount + 1)
         purge = discord.Embed(
             title=f"Message deleted",
@@ -51,7 +48,6 @@ class Moderation(commands.Cog):
         message = await ctx.channel.send(embed=purge)
         await sleep(5)
         await message.delete()
-
 
 def setup(client):
     client.add_cog(Moderation(client))

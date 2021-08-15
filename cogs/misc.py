@@ -137,8 +137,7 @@ class Miscellaneous(commands.Cog):
 
     @command(name="nepse")
     async def nepse_command(self, ctx, company):
-        print(date.today())
-        today_date =  date.today()
+        today_date = date.today()
         url = "https://api.sheezh.com/nepse/v1/price"
         async with ClientSession() as session:
             async with session.post(

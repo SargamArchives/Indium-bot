@@ -1,8 +1,6 @@
+from aiohttp import client
 import discord
-from discord import message
 from discord.ext import commands
-from discord.ext.commands import context
-from discord.ext.commands.cog import Cog
 
 from typing import List
 

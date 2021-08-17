@@ -41,7 +41,6 @@ class Moderation(commands.Cog):
     async def purge(self, ctx: commands.Context,  amount: int):
         if amount < 1:
             return
-        await ctx.channel
         await ctx.channel.purge(limit=amount + 1)
         purge = discord.Embed(
             title=f"Message deleted",

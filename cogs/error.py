@@ -9,13 +9,12 @@ from discord.ext.commands.errors import BadArgument, BotMissingPermissions, Comm
 import traceback
 
 
-
 class Error(commands.Cog):
     """
-    
+
     """
     @commands.Cog.listener()
-    async def on_command_error(self,ctx: commands.Context, error: commands.CommandError) -> None:
+    async def on_command_error(self, ctx: commands.Context, error: commands.CommandError) -> None:
         if isinstance(error, CommandNotFound):
             return
 
@@ -24,36 +23,33 @@ class Error(commands.Cog):
             await sleep(5)
             await message.delete()
 
-
         if isinstance(error, MissingRequiredArgument):
             message = await ctx.send("Please pass all required arguments ✅")
             await sleep(5)
             await message.delete()
-
 
         if isinstance(error, MissingPermissions):
             message = await ctx.send("You are missing role permissions")
             await sleep(5)
             await message.delete()
 
-
         if isinstance(error, BotMissingPermissions):
             error_embed = discord.Embed(
-                description = "❎ I don't have permissions to Manage Messages."
+                description="❎ I don't have permissions to Manage Messages."
             )
             await ctx.send(embed=error_embed)
-
 
         if isinstance(error, MissingRole):
             message = await ctx.send("❎ You are missing role permissions good sir.")
             sleep(5)
             await message.delete()
-            
 
         else:
-            await ctx.send("An unknown error occured.")
-            await ctx.send(error)
-            print(error)
+            m = await ctx.send("An unknown error occured.")
+            n = await ctx.send(error)
+            await sleep(5)
+            await m.delete()
+            await n.delete()
             print(traceback.print_exc)
 
 

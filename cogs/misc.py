@@ -26,7 +26,7 @@ class Miscellaneous(commands.Cog):
 
     @commands.command(name="av")
     async def avatar(self, ctx, user: discord.Member = None):
-        if user == None: user = ctx.author
+        if user is None: user = ctx.author
         avatar_embed = discord.Embed(
             title=f"{user.name}#{user.discriminator}\nAvatar"
         )

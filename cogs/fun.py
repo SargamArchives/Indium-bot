@@ -13,7 +13,7 @@ class Fun(commands.Cog):
 
     @commands.command()
     async def pp(self, ctx, user: discord.Member = None) -> None:
-        if user == None:
+        if user is None:
             user = ctx.author
         pp_str = "8"
         for _ in range(randrange(10)):

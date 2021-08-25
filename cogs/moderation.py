@@ -15,7 +15,7 @@ class Moderation(commands.Cog):
     async def kick(self, ctx: commands.Context, user: discord.Member, *, reason="No reason provided"):
         await user.kick(reason=reason)
         kick = discord.Embed(
-            title=f":boot: Kicked {user.name}!",
+            title=f":boot: Kicked {user.display_name}!",
             description=f"Reason: {reason}\nBy: {ctx.author.mention}"
         )
         await ctx.message.delete()
@@ -30,7 +30,6 @@ class Moderation(commands.Cog):
             title=f":hammer: Banned {user.name}!",
             description=f"Reson: {reason}\nBy: {ctx.author.mention}"
         )
-
         message = await ctx.send(embed=ban)
         await user.send(embed=ban)
         await sleep(10)

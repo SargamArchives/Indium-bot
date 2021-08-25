@@ -11,7 +11,7 @@ import traceback
 
 class Error(commands.Cog):
     """
-
+    Error handler for bot commands
     """
     @commands.Cog.listener()
     async def on_command_error(self, ctx: commands.Context, error: commands.CommandError) -> None:

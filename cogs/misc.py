@@ -1,12 +1,14 @@
 import discord
+from discord.errors import NoMoreItems
 from discord.ext import commands
 from discord.ext.commands.core import command
 
 from datetime import date
 from asyncio import sleep
 from aiohttp import request, ClientSession
-from config import API_KEY
+from typing import Optional
 
+from config import API_KEY
 from utils import CountryResponse
 
 
@@ -24,7 +26,7 @@ class Miscellaneous(commands.Cog):
         await ctx.send(embed=ping_embed)
 
     @commands.command(name="av")
-    async def avatar(self, ctx, user: discord.Member = None):
+    async def avatar(self, ctx, user: Optional[discord.Member] = None):
         if user is None: user = ctx.author
         avatar_embed = discord.Embed(
             title=f"{user.name}#{user.discriminator}\nAvatar"
@@ -117,7 +119,7 @@ class Miscellaneous(commands.Cog):
                     print(data)
                     output = "\n".join(lines[:15])
                     code_embed = discord.Embed(
-                        title=f"Ran your {data['language']} code \nin version {data['version']}",
+                        title=f"Ran your {data['language']} code",
                         description=f"Output\n{output}"
                     )
                     await ctx.send(embed=code_embed)
@@ -149,7 +151,32 @@ class Miscellaneous(commands.Cog):
                 name = await res.json()
                 companyName = name[0]["companyName"]
         embed = discord.Embed(
-            description=f"**Maximum Price** - {maxprice}\n**Minimum Price** - {minprice}\n**Closing Price** - {closingprice}\n**Traded Shares** - {tradedshares}\n**Previous Closing Price** - {previousclosing}",
+            title=f"Details for: {companyName}"
+        )
+        embed.add_field(
+            name = "Maximum Price",
+            value = f"=Rs {maxprice}",
+            inline = False
+        )
+        embed.add_field(
+            name = "Minimum Price",
+            value = f"=Rs {minprice}",
+            inline = False
+        )
+        embed.add_field(
+            name = "Closing Price",
+            value = f"=Rs {closingprice}",
+            inline = False
+        )
+        embed.add_field(
+            name = "Traded Shares",
+            value = f"=Rs {tradedshares}",
+            inline = False
+        )
+        embed.add_field(
+            name = "Previous Closing Price",
+            value = f"=Rs {previousclosing}",
+            inline = False
         )
         embed.set_thumbnail(
             url="https://cdn6.aptoide.com/imgs/a/8/4/a8435b6d8d3424dbc79a4ad52f976ad7_icon.png"

@@ -1,6 +1,8 @@
+from os import name
 import discord
 from discord.errors import NoMoreItems
 from discord.ext import commands
+from discord.ext.commands import context
 from discord.ext.commands.core import command
 
 from datetime import date
@@ -69,9 +71,28 @@ class Miscellaneous(commands.Cog):
 
                 country_embed = discord.Embed(
                     title=f"Country: {country}",
-                    description=f"Capital: {capital}\nCurrency: {currency}\nRegion: {continenet}\nPopulation: {population}"
                 )
-                country_embed.set_image(
+                country_embed.add_field(
+                    name="Capital",
+                    value=f"{capital}",
+                    inline=False
+                )
+                country_embed.add_field(
+                    name="Currency",
+                    value=f"{currency}",
+                    inline=False
+                )
+                country_embed.add_field(
+                    name="Region",
+                    value=f"{continenet}",
+                    inline=False
+                )
+                country_embed.add_field(
+                    name="Population",
+                    value=f"{population}",
+                    inline=False
+                )
+                country_embed.set_thumbnail(
                     url=f"https://flagcdn.com/256x192/{flag}.png")
                 await ctx.send(embed=country_embed)
 

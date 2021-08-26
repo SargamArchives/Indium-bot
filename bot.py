@@ -1,4 +1,3 @@
-from aiohttp import client
 import discord
 from discord.ext import commands
 
@@ -29,10 +28,10 @@ for ext in extensions:
 
 
 @client.command()
-async def reload(ctx, cog: List[str]):
+async def reload(ctx, cog_name: List[str]):
     for id in OWNER_ID:
         if ctx.message.author.id == id:
-            client.reload_extension(f"cogs.{cog}")
-            await ctx.send(f"sreloaded cogs.{cog}")
+            client.reload_extension(f"cogs.{cog_name}")
+            await ctx.send(f"sreloaded cogs.{cog_name}")
 
 client.run(BOT_TOKEN)

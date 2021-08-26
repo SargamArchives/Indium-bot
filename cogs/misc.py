@@ -71,11 +71,6 @@ class Miscellaneous(commands.Cog):
                 country_embed.set_image(
                     url=f"https://flagcdn.com/256x192/{flag}.png")
                 await ctx.send(embed=country_embed)
-            else:
-                covid_embed = discord.Embed(
-                description=f"Couldnot find about your country:😢 {country}"
-                )
-                await ctx.send(embed=covid_embed)
 
     @commands.command(name="covid") #TODO This code doesn't work well
     async def corona(self, ctx, country="nepal"):

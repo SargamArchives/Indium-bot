@@ -27,7 +27,8 @@ class Miscellaneous(commands.Cog):
 
     @commands.command(name="av")
     async def avatar(self, ctx, user: Optional[discord.Member] = None):
-        if user is None: user = ctx.author
+        if user is None:
+            user = ctx.author
         avatar_embed = discord.Embed(
             title=f"{user.name}#{user.discriminator}\nAvatar"
         )
@@ -41,7 +42,7 @@ class Miscellaneous(commands.Cog):
         async with request("GET", URL) as response:
             if response.status == 200:
                 data = await response.json()
-                weather_data = data["weather"] 
+                weather_data = data["weather"]
                 wind_data = data["wind"]
                 weather = discord.Embed(
                     title=f"Weather report: {name}",
@@ -74,7 +75,7 @@ class Miscellaneous(commands.Cog):
                     url=f"https://flagcdn.com/256x192/{flag}.png")
                 await ctx.send(embed=country_embed)
 
-    @commands.command(name="covid") #TODO This code doesn't work well
+    @commands.command(name="covid")  # TODO This code doesn't work well
     async def corona(self, ctx, country="nepal"):
         URL = f"https://api.covid19api.com/live/country/{country}/status/confirmed"
         async with request("GET", URL) as response:
@@ -93,30 +94,27 @@ class Miscellaneous(commands.Cog):
                 )
                 await ctx.send(embed=covid_embed)
 
-    @commands.command(aliases=["compile","run"])
-    async def code_compile(self,ctx,*, code):
+    @commands.command(aliases=["compile", "run"])
+    async def code_compile(self, ctx, *, code):
         print("running")
         code = code.lower().strip("`")
         index = code.find("\n")
         lang = ""
         for i in range(index):
             lang += code[i]
-        code = code.replace(f"{lang}\n","")
+        code = code.replace(f"{lang}\n", "")
         data = {
             "language": lang,
             "source": f"{code}"
         }
         URL = "https://emkc.org/api/v1/piston/execute"
-        async with request("POST",URL, data = data) as response:
+        async with request("POST", URL, data=data) as response:
             if response.status == 200:
                 data = await response.json()
                 if data["ran"] and data["output"]:
-                    print(data['output'])
                     output = data['output']
                     output = output[:500]
                     lines = output.splitlines()
-                    print(len(lines))
-                    print(data)
                     output = "\n".join(lines[:15])
                     code_embed = discord.Embed(
                         title=f"Ran your {data['language']} code",
@@ -154,35 +152,36 @@ class Miscellaneous(commands.Cog):
             title=f"Details for: {companyName}"
         )
         embed.add_field(
-            name = "Maximum Price",
-            value = f"=Rs {maxprice}",
-            inline = False
+            name="Maximum Price",
+            value=f"=Rs {maxprice}",
+            inline=False
         )
         embed.add_field(
-            name = "Minimum Price",
-            value = f"=Rs {minprice}",
-            inline = False
+            name="Minimum Price",
+            value=f"=Rs {minprice}",
+            inline=False
         )
         embed.add_field(
-            name = "Closing Price",
-            value = f"=Rs {closingprice}",
-            inline = False
+            name="Closing Price",
+            value=f"=Rs {closingprice}",
+            inline=False
         )
         embed.add_field(
-            name = "Traded Shares",
-            value = f"=Rs {tradedshares}",
-            inline = False
+            name="Traded Shares",
+            value=f"=Rs {tradedshares}",
+            inline=False
         )
         embed.add_field(
-            name = "Previous Closing Price",
-            value = f"=Rs {previousclosing}",
-            inline = False
+            name="Previous Closing Price",
+            value=f"=Rs {previousclosing}",
+            inline=False
         )
         embed.set_thumbnail(
             url="https://cdn6.aptoide.com/imgs/a/8/4/a8435b6d8d3424dbc79a4ad52f976ad7_icon.png"
         )
         embed.set_author(name=f"Details for - {companyName} ")
         await ctx.send(embed=embed)
+
 
 def setup(client):
     client.add_cog(Miscellaneous(client))

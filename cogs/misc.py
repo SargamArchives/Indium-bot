@@ -1,15 +1,14 @@
-from aiohttp.client import ClientSession
-from discord.embeds import Embed
-
-from utils import CountryResponse
 import discord
 from discord.ext import commands
+from discord.ext.commands.core import command
 
 from datetime import date
 from asyncio import sleep
-from aiohttp import *
-from discord.ext.commands.core import command
+from aiohttp import request, ClientSession
 from config import API_KEY
+
+from utils import CountryResponse
+
 
 class Miscellaneous(commands.Cog):
     def __init__(self, client):
@@ -35,10 +34,9 @@ class Miscellaneous(commands.Cog):
 
     @commands.command()
     async def weather(self, ctx, name="nepal"):
-        api_key = API_KEY
-        URL = f"https://api.openweathermap.org/data/2.5/weather?q={name}&appid={api_key}&units=metric"
+        URL = f"https://api.openweathermap.org/data/2.5/weather?q={name}&appid={API_KEY}&units=metric"
 
-        async with request("GET", URL, headers={}) as response:
+        async with request("GET", URL) as response:
             if response.status == 200:
                 data = await response.json()
                 weather_data = data["weather"] 
@@ -155,7 +153,7 @@ class Miscellaneous(commands.Cog):
             ) as res:
                 name = await res.json()
                 companyName = name[0]["companyName"]
-        embed = Embed(
+        embed = discord.Embed(
             description=f"**Maximum Price** - {maxprice}\n**Minimum Price** - {minprice}\n**Closing Price** - {closingprice}\n**Traded Shares** - {tradedshares}\n**Previous Closing Price** - {previousclosing}",
         )
         embed.set_thumbnail(

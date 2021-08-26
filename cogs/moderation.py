@@ -1,9 +1,6 @@
 import discord
-from discord import channel
 from discord.ext import commands
 from asyncio import sleep
-
-from discord.ext.commands import context
 
 
 class Moderation(commands.Cog):
@@ -24,7 +21,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(ban_members=True)
-    async def ban(self, ctx: commands.Context, user: discord.Member, *, reason="No reason Provided"):
+    async def ban(self, ctx: commands.Context, user: discord.Member, *, reason: str ="No reason Provided"):
         await user.ban(reason=reason)
         ban = discord.Embed(
             title=f":hammer: Banned {user.name}!",

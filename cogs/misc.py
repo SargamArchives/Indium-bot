@@ -1,29 +1,37 @@
-from os import name
+from os import wait
 import discord
-from discord.errors import NoMoreItems
+from discord import colour
+from discord import embeds
 from discord.ext import commands
-from discord.ext.commands import context
-from discord.ext.commands.core import command
 
 from datetime import date
 from asyncio import sleep
 from aiohttp import request, ClientSession
 from typing import Optional
 
-from config import API_KEY
+from config import API_KEY, DEFAULT_EMBED_COLOR
 from utils import CountryResponse
 
 
 class Miscellaneous(commands.Cog):
+    """
+    Some Miscellaneous commands
+    """
+
     def __init__(self, client):
-        self.client = client
+        self.client = client,
+        self.embed_color = DEFAULT_EMBED_COLOR
+        self.embed = discord.Embed(
+            colour=self.embed_color
+        )
 
     @commands.command()
     async def ping(self, ctx):
         ping = round(self.client.latency * 1000)
         ping_embed = discord.Embed(
             title=f"pong🏓",
-            description=f"{ping}ms"
+            description=f"{ping}ms",
+            colour=self.embed_color
         )
         await ctx.send(embed=ping_embed)
 
@@ -32,10 +40,15 @@ class Miscellaneous(commands.Cog):
         if user is None:
             user = ctx.author
         avatar_embed = discord.Embed(
-            title=f"{user.name}#{user.discriminator}\nAvatar"
+            title=f"{user.name}#{user.discriminator}\nAvatar",
+            colour=self.embed_color
         )
         avatar_embed.set_image(url=user.avatar_url)
         await ctx.send(embed=avatar_embed)
+
+
+# TODO Fix this thing someday
+
 
     @commands.command()
     async def weather(self, ctx, name="nepal"):
@@ -44,17 +57,40 @@ class Miscellaneous(commands.Cog):
         async with request("GET", URL) as response:
             if response.status == 200:
                 data = await response.json()
+
                 weather_data = data["weather"]
                 wind_data = data["wind"]
+                status = weather_data[0]['main']
+                description = weather_data[0]['description']
+                wind_speed = wind_data['speed']
+
                 weather = discord.Embed(
                     title=f"Weather report: {name}",
-                    description=f"Status: {weather_data[0]['main']}\nDescription: {weather_data[0]['description']}\nWind Speed: {wind_data['speed']}km/hr\n"
+                    colour=self.embed_color
                 )
-                weather.set_image(
+                weather.add_field(
+                    name="Status",
+                    value=f"{status}",
+                    inline=False
+                )
+                weather.add_field(
+                    name="Description",
+                    value=f"{description}",
+                    inline=False
+                )
+                weather.add_field(
+                    name="Wind Speed",
+                    value=f"{wind_speed}km/hr",
+                    inline=False
+                )
+                weather.set_thumbnail(
                     url=f"http://openweathermap.org/img/wn/{weather_data[0]['icon']}@2x.png")
                 await ctx.send(embed=weather)
             else:
-                await ctx.send("Can't find information about your city :(")
+                weather_fail_embed = self.embed
+                weather_fail_embed.title = "Oh no"
+                weather_fail_embed.description = "Could not find informatin about your city"
+                await ctx.send(embed=weather_fail_embed)
 
     @commands.command(name="country")
     async def country(self, ctx, country="nepal"):
@@ -71,6 +107,7 @@ class Miscellaneous(commands.Cog):
 
                 country_embed = discord.Embed(
                     title=f"Country: {country}",
+                    colour=self.embed_color
                 )
                 country_embed.add_field(
                     name="Capital",
@@ -103,12 +140,28 @@ class Miscellaneous(commands.Cog):
             if response.status == 200:
                 data = await response.json()
                 todays_data = data[len(data) - 1]
-                Confirmed = todays_data["Confirmed"]
-                Deaths = todays_data["Deaths"]
-                Active = todays_data["Active"]
+                confirmed = todays_data["Confirmed"]
+                deaths = todays_data["Deaths"]
+                active = todays_data["Active"]
+
                 covid_embed = discord.Embed(
                     title=f"Covid stats for: {country}",
-                    description=f"**Total Confirmed**: {Confirmed}\n**Total Deaths**: {Deaths}\n**Total Active**: {Active}"
+                    colour=self.embed_color
+                )
+                covid_embed.add_field(
+                    name="Total Confirmed",
+                    value=f"{confirmed}",
+                    inline=False
+                )
+                covid_embed.add_field(
+                    name="Total Deaths",
+                    value=f"{deaths}",
+                    inline=False
+                )
+                covid_embed.add_field(
+                    name="Total Active",
+                    value=f"{active}",
+                    inline=False
                 )
                 covid_embed.set_image(
                     url="https://www.fda.gov/files/Coronavirus_3D_illustration_by_CDC_1600x900.png"
@@ -139,17 +192,22 @@ class Miscellaneous(commands.Cog):
                     output = "\n".join(lines[:15])
                     code_embed = discord.Embed(
                         title=f"Ran your {data['language']} code",
-                        description=f"Output\n{output}"
+                        description=f"Output\n{output}",
+                        colour=self.embed_color
                     )
                     await ctx.send(embed=code_embed)
                 else:
                     print(data)
             else:
-                m = await ctx.send("**oh no**\nCould not compile your code! :(")
-                await sleep(5)
+                m = discord.Embed(
+                    title=f"Oh no",
+                    description=f"Could not compile your code! :(",
+                    colour=self.embed_color
+                )
+                await sleep(10)
                 await m.delete()
 
-    @command(name="nepse")
+    @commands.command(name="nepse")
     async def nepse_command(self, ctx, company):
         today_date = date.today()
         url = "https://api.sheezh.com/nepse/v1/price"
@@ -170,7 +228,8 @@ class Miscellaneous(commands.Cog):
                 name = await res.json()
                 companyName = name[0]["companyName"]
         embed = discord.Embed(
-            title=f"Details for: {companyName}"
+            title=f"Details for: {companyName}",
+            colour=self.embed_color
         )
         embed.add_field(
             name="Maximum Price",

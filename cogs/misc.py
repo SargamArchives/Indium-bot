@@ -200,7 +200,6 @@ class Miscellaneous(commands.Cog):
         embed.set_thumbnail(
             url="https://cdn6.aptoide.com/imgs/a/8/4/a8435b6d8d3424dbc79a4ad52f976ad7_icon.png"
         )
-        embed.set_author(name=f"Details for - {companyName} ")
         await ctx.send(embed=embed)
 
 

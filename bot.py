@@ -3,14 +3,14 @@ from discord.ext import commands
 
 from typing import List
 
-from config import BOT_TOKEN, ID1, ID2
+from config import BOT_TOKEN, ID1, ID2, DEFAULT_PREFIX
 
 OWNER_ID = [ID1, ID2]
 
 intents = discord.Intents.all()
 
 client = commands.Bot(
-    command_prefix=commands.when_mentioned_or(">"),
+    command_prefix=commands.when_mentioned_or(DEFAULT_PREFIX),
     intents=intents
 )
 

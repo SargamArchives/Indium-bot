@@ -9,6 +9,3 @@ Pipfile.lock
 /__pycache__
 
 /cogs/__pycache__
-
-pp_size.py
-rps.py

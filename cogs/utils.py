@@ -27,13 +27,13 @@ class Utilis(commands.Cog):
         for id in self.owner_id:
             if ctx.message.author.id == id:
                 delta_uptime = datetime.utcnow() - self.client.launch_time
-                hours, remainder = divmod(
-                    int(delta_uptime.total_seconds()), 3600)
+                hours, remainder = divmod(int(delta_uptime.total_seconds()), 3600)
                 minutes, seconds = divmod(remainder, 60)
                 days, hours = divmod(hours, 24)
-                uptime_embed = discord.Embed(title=f"Online since: {days}d, {hours}h, {minutes}m, {seconds}s",
-                                             colour=self.embed_color
-                                             )
+                uptime_embed = discord.Embed(
+                    title=f"Online since: {days}d, {hours}h, {minutes}m, {seconds}s",
+                    colour=self.embed_color,
+                )
                 await ctx.send(embed=uptime_embed)
 
 

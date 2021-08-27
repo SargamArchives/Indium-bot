@@ -1,20 +1,36 @@
-import re
+from _typeshed import Self
 import discord
 from discord.ext import commands
-from discord.ext.commands import cog
-from asyncio import sleep
-from discord.ext.commands import errors
-from discord.ext.commands.errors import BadArgument, BotMissingPermissions, CommandNotFound, MissingPermissions, MissingRequiredArgument, MissingRole
+from discord.ext.commands.errors import (
+    BadArgument,
+    BotMissingPermissions,
+    CommandNotFound,
+    MissingPermissions,
+    MissingRequiredArgument,
+    MissingRole,
+)
 
+from asyncio import sleep
 import traceback
+
+from config import DEFAULT_EMBED_COLOR
 
 
 class Error(commands.Cog):
     """
     Error handler for bot commands
     """
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.embed_color = DEFAULT_EMBED_COLOR
+
     @commands.Cog.listener()
-    async def on_command_error(self, ctx: commands.Context, error: commands.CommandError) -> None:
+    async def on_command_error(
+        self,
+        ctx: commands.Context,
+        error: commands.CommandError,
+    ) -> None:
         if isinstance(error, CommandNotFound):
             return
 
@@ -35,7 +51,8 @@ class Error(commands.Cog):
 
         if isinstance(error, BotMissingPermissions):
             error_embed = discord.Embed(
-                description="❎ I don't have permissions to Manage Messages."
+                description="❎ I don't have permissions to Manage Messages.",
+                colour=self.embed_color,
             )
             await ctx.send(embed=error_embed)
 

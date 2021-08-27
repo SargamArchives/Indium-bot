@@ -32,7 +32,7 @@ class Fun(commands.Cog):
         pp_embed = discord.Embed(
             title="PP size machine",
             description=f"{user.name}'s pp size:\n {self.pp()}",
-            colour=self.embed_color
+            colour=self.embed_color,
         )
         await ctx.send(embed=pp_embed)
 
@@ -41,7 +41,9 @@ class Fun(commands.Cog):
         await ctx.reply(date.today())
 
     @commands.command()
-    async def device(self, ctx: commands.context, user: Optional[discord.Member] = None) -> None:
+    async def device(
+        self, ctx: commands.context, user: Optional[discord.Member] = None
+    ) -> None:
         if user is None:
             user = ctx.author
         comp_status = user.desktop_status
@@ -49,21 +51,11 @@ class Fun(commands.Cog):
         web_status = user.web_status
 
         embed = discord.Embed(
-            title=f"{user.display_name}'s device status",
-            colour=self.embed_color
+            title=f"{user.display_name}'s device status", colour=self.embed_color
         )
-        embed.add_field(
-            name="PC client",
-            value=f"💻: {comp_status}",
-            inline=True)
-        embed.add_field(
-            name="Web client",
-            value=f"🌏: {web_status}",
-            inline=False)
-        embed.add_field(
-            name="Mobile client",
-            value=f"📱: {mobile_status}",
-            inline=False)
+        embed.add_field(name="PC client", value=f"💻: {comp_status}", inline=True)
+        embed.add_field(name="Web client", value=f"🌏: {web_status}", inline=False)
+        embed.add_field(name="Mobile client", value=f"📱: {mobile_status}", inline=False)
 
         embed.set_thumbnail(url=user.avatar_url)
         await ctx.send(embed=embed)

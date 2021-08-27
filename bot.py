@@ -10,8 +10,7 @@ OWNER_ID = [ID1, ID2]
 intents = discord.Intents.all()
 
 client = commands.Bot(
-    command_prefix=commands.when_mentioned_or(DEFAULT_PREFIX),
-    intents=intents
+    command_prefix=commands.when_mentioned_or(DEFAULT_PREFIX), intents=intents
 )
 
 extensions = [
@@ -33,5 +32,6 @@ async def reload(ctx, cog_name: List[str]):
         if ctx.message.author.id == id:
             client.reload_extension(f"cogs.{cog_name}")
             await ctx.send(f"sreloaded cogs.{cog_name}")
+
 
 client.run(BOT_TOKEN)

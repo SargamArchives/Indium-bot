@@ -15,7 +15,7 @@ client = commands.Bot(
 
 extensions = [
     "cogs.utils",
-    "cogs.error",
+    # "cogs.error",
     "cogs.moderation",
     "cogs.fun",
     "cogs.misc",

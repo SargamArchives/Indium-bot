@@ -41,7 +41,7 @@ class Fun(commands.Cog):
     async def device(
         self,
         ctx: commands.Context,
-        user: Optional[Union[discord.User, discord.Member]] = None,
+        user: Optional[Union[discord.Member, discord.User]] = None,
     ) -> None:
         if user is None:
             user = ctx.author
@@ -58,11 +58,6 @@ class Fun(commands.Cog):
 
         embed.set_thumbnail(url=user.avatar_url)
         await ctx.send(embed=embed)
-
-    @commands.Cog.listener()
-    async def on_message_delete(self, message, ctx):
-        print("message deletd")
-
 
 def setup(client):
     client.add_cog(Fun(client))

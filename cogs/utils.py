@@ -6,7 +6,7 @@ from config import ID1, ID2, ACTIVITY_STATUS, DEFAULT_EMBED_COLOR
 
 
 class Utilis(commands.Cog):
-    def __init__(self, client):
+    def __init__(self, client: discord.Client):
         self.client = client
         self.status = cycle(ACTIVITY_STATUS)
         client.launch_time = datetime.utcnow()
@@ -20,7 +20,8 @@ class Utilis(commands.Cog):
 
     @tasks.loop(seconds=10)
     async def change_status(self):
-        await self.client.change_presence(activity=discord.Game(next(self.status)))
+        activity=discord.Activity(type=discord.ActivityType.watching, name=next(self.status))
+        await self.client.change_presence(activity=activity)
 
     @commands.command()
     async def uptime(self, ctx):

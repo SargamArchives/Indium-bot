@@ -3,7 +3,9 @@ from discord.ext import commands
 
 from random import randrange
 from datetime import date
-from typing import Optional
+from typing import Optional, Union
+
+from discord.member import Member
 
 from config import DEFAULT_EMBED_COLOR
 
@@ -37,7 +39,9 @@ class Fun(commands.Cog):
 
     @commands.command()
     async def device(
-        self, ctx: commands.Context, user: Optional[discord.Member] = None
+        self,
+        ctx: commands.Context,
+        user: Optional[Union[discord.User, discord.Member]] = None,
     ) -> None:
         if user is None:
             user = ctx.author
@@ -54,6 +58,10 @@ class Fun(commands.Cog):
 
         embed.set_thumbnail(url=user.avatar_url)
         await ctx.send(embed=embed)
+
+    @commands.Cog.listener()
+    async def on_message_delete(self, message, ctx):
+        print("message deletd")
 
 
 def setup(client):

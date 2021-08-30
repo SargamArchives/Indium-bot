@@ -6,6 +6,9 @@ from config import ID1, ID2, ACTIVITY_STATUS, DEFAULT_EMBED_COLOR
 
 
 class Utilis(commands.Cog):
+    """
+    some essential utility for bot
+    """
     def __init__(self, client: discord.Client):
         self.client = client
         self.status = cycle(ACTIVITY_STATUS)

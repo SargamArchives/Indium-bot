@@ -1,4 +1,3 @@
-from _typeshed import Self
 import discord
 from discord.ext import commands
 from discord.ext.commands.errors import (
@@ -21,8 +20,9 @@ class Error(commands.Cog):
     Error handler for bot commands
     """
 
-    def __init__(self) -> None:
+    def __init__(self, client: commands.Bot) -> None:
         super().__init__()
+        self.client = client,
         self.embed_color = DEFAULT_EMBED_COLOR
 
     @commands.Cog.listener()

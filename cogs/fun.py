@@ -17,21 +17,16 @@ class Fun(commands.Cog):
         self.client = client
         self.embed_color = DEFAULT_EMBED_COLOR
 
-    def pp(self) -> str:
-        pp_str = "8"
-        for _ in range(randrange(10)):
-            pp_str += "="
-        pp_str += "D"
-        return pp_str
-
     @commands.command()
     async def pp(self, ctx, user: Optional[discord.Member] = None) -> None:
         if user is None:
             user = ctx.author
-
+        pp_str = ["8", "", "D"]
+        pp_str[-2] = "".join(["=" for _ in range(randrange(1, 10))])
+        pp_str = "".join(pp_str)
         pp_embed = discord.Embed(
             title="PP size machine",
-            description=f"{user.name}'s pp size:\n {self.pp()}",
+            description=f"{user.name}'s pp size:\n {pp_str}",
             colour=self.embed_color,
         )
         await ctx.send(embed=pp_embed)
@@ -42,7 +37,7 @@ class Fun(commands.Cog):
 
     @commands.command()
     async def device(
-        self, ctx: commands.context, user: Optional[discord.Member] = None
+        self, ctx: commands.Context, user: Optional[discord.Member] = None
     ) -> None:
         if user is None:
             user = ctx.author

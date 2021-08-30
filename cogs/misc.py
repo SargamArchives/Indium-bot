@@ -15,8 +15,8 @@ class Miscellaneous(commands.Cog):
     Some Miscellaneous commands
     """
 
-    def __init__(self, client):
-        self.client = (client,)
+    def __init__(self, client: commands.Bot):
+        self.client = client
         self.embed_color = DEFAULT_EMBED_COLOR
         self.embed = discord.Embed(colour=self.embed_color)
 
@@ -29,7 +29,9 @@ class Miscellaneous(commands.Cog):
         await ctx.send(embed=ping_embed)
 
     @commands.command(name="av")
-    async def avatar(self, ctx, user: Optional[discord.Member] = None):
+    async def avatar(
+        self, ctx: commands.Context, user: Optional[discord.User] = None
+    ) -> None:
         if user is None:
             user = ctx.author
         avatar_embed = discord.Embed(
@@ -41,7 +43,7 @@ class Miscellaneous(commands.Cog):
     # TODO Fix this thing someday
 
     @commands.command()
-    async def weather(self, ctx, name="nepal"):
+    async def weather(self, ctx, name: str = "nepal"):
         URL = f"https://api.openweathermap.org/data/2.5/weather?q={name}&appid={API_KEY}&units=metric"
 
         async with request("GET", URL) as response:
@@ -55,7 +57,7 @@ class Miscellaneous(commands.Cog):
                 wind_speed = wind_data["speed"]
 
                 weather = discord.Embed(
-                    title=f"Weather report: {name}", colour=self.embed_color
+                    title=f"Weather report: {name.title()}", colour=self.embed_color
                 )
                 weather.add_field(name="Status", value=f"{status}", inline=False)
                 weather.add_field(
@@ -132,7 +134,7 @@ class Miscellaneous(commands.Cog):
                 covid_embed.add_field(
                     name="Total Active", value=f"{active}", inline=False
                 )
-                covid_embed.set_image(
+                covid_embed.set_thumbnail(
                     url="https://www.fda.gov/files/Coronavirus_3D_illustration_by_CDC_1600x900.png"
                 )
                 await ctx.send(embed=covid_embed)

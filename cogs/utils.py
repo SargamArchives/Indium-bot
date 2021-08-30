@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands, tasks
 from itertools import cycle
 from datetime import datetime
-from config import ID1, ID2, ACTIVITY_STATUS, DEFAULT_EMBED_COLOR
+from config import ID1, ID2, ACTIVITY_STATUS, DEFAULT_EMBED_COLOR, DEFAULT_PREFIX
 
 
 class Utilis(commands.Cog):
@@ -40,6 +40,11 @@ class Utilis(commands.Cog):
                 )
                 await ctx.send(embed=uptime_embed)
 
+    @commands.Cog.listener()
+    async def on_message(self, message: discord.Message):
+        if message.content == "<@!861148454294519828>":
+            channel: discord.TextChannel = message.channel
+            await channel.send(f"Hello, my prefix for this server is {DEFAULT_PREFIX} or <@!861148454294519828>")
 
 def setup(client):
     client.add_cog(Utilis(client))

@@ -14,12 +14,12 @@ client = commands.Bot(
 )
 
 extensions = [
-    "jishaku",
-    "cogs.fun",
-    "cogs.misc",
-    "cogs.moderation",
     "cogs.utils",
     "cogs.error",
+    "cogs.moderation",
+    "cogs.fun",
+    "cogs.misc",
+    "jishaku",
 ]
 
 for ext in extensions:

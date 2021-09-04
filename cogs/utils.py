@@ -46,7 +46,8 @@ class Utilis(commands.Cog):
             channel: discord.TextChannel = message.channel
             await channel.send(f"Hello, my prefix for this server is {DEFAULT_PREFIX} or <@!861148454294519828>")
         if message.content == "hi":
-            await message.reply("https://cdn.discordapp.com/attachments/827102815289344014/883637783728619580/unknown.gif")
+            if message.author.id == 736469707603050506:
+                await message.reply("https://cdn.discordapp.com/attachments/827102815289344014/883637783728619580/unknown.gif")
 
 
 def setup(client):

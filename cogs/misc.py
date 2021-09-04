@@ -1,4 +1,6 @@
+import asyncio
 import discord
+from discord.embeds import Embed
 from discord.ext import commands
 
 from datetime import date
@@ -210,6 +212,26 @@ class Miscellaneous(commands.Cog):
         )
         await ctx.send(embed=embed)
 
+    @commands.command(name="define")
+    async def define_urban(self, ctx, search_query):
+        URL = f"https://urbanscraper.herokuapp.com/search/{search_query}"
+        async with request("GET", url=URL) as response:
+            if response.status == 200:
+                request_data = await response.json()
+                term = request_data[0]["term"].title()
+                definition = request_data[0]["definition"]
+                example = request_data[0]["example"]
+                embed = self.embed
+                embed.title = f"{term}"
+                embed.add_field(name=f"Definition", value=f"{definition}", inline=False)
+                embed.add_field(name=f"Example", value=f"{example}", inline=False)
+                await ctx.send(embed=embed)
+                embed.clear_fields()
+            else:
+                request_data = await response.json()
+                m = await ctx.send(request_data["message"])
+                asyncio.sleep(5)
+                await m.delete()
 
 def setup(client):
     client.add_cog(Miscellaneous(client))

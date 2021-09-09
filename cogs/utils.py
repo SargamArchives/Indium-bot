@@ -10,6 +10,7 @@ class Utilis(commands.Cog):
     """
     some essential utility for bot
     """
+
     def __init__(self, client: discord.Client):
         self.client = client
         self.status = cycle(ACTIVITY_STATUS)
@@ -24,7 +25,9 @@ class Utilis(commands.Cog):
 
     @tasks.loop(seconds=10)
     async def change_status(self):
-        activity=discord.Activity(type=discord.ActivityType.watching, name=next(self.status))
+        activity = discord.Activity(
+            type=discord.ActivityType.watching, name=next(self.status)
+        )
         await self.client.change_presence(activity=activity)
 
     @commands.command()
@@ -45,7 +48,9 @@ class Utilis(commands.Cog):
     async def on_message(self, message: discord.Message):
         if message.content == "<@!861148454294519828>":
             channel: discord.TextChannel = message.channel
-            await channel.send(f"Hello, my prefix for this server is {DEFAULT_PREFIX} or <@!861148454294519828>")
+            await channel.send(
+                f"Hello, my prefix for this server is {DEFAULT_PREFIX} or <@!861148454294519828>"
+            )
 
     @commands.command()
     async def invite(self, ctx: commands.Context):
@@ -54,9 +59,10 @@ class Utilis(commands.Cog):
         invite_embed = discord.Embed(
             title="Invite me 🥳",
             color=self.embed_color,
-            description=f"Click [here]({invite_url}) to invite me."
+            description=f"Click [here]({invite_url}) to invite me.",
         )
         await ctx.send(embed=invite_embed)
+
 
 def setup(client):
     client.add_cog(Utilis(client))

@@ -46,10 +46,10 @@ class Utilis(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
-        if message.content == "<@!861148454294519828>":
+        if message.content == f"<@!{self.client.user.id}>":
             channel: discord.TextChannel = message.channel
             await channel.send(
-                f"Hello, my prefix for this server is {DEFAULT_PREFIX} or <@!861148454294519828>"
+                f"Hello, my prefix for this server is {DEFAULT_PREFIX} or <@!{self.client.user.id}>"
             )
 
     @commands.command()

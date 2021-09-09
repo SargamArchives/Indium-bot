@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands, tasks
 from itertools import cycle
 from datetime import datetime
+
 from config import ID1, ID2, ACTIVITY_STATUS, DEFAULT_EMBED_COLOR, DEFAULT_PREFIX
 
 
@@ -27,7 +28,7 @@ class Utilis(commands.Cog):
         await self.client.change_presence(activity=activity)
 
     @commands.command()
-    async def uptime(self, ctx):
+    async def uptime(self, ctx: commands.Context):
         for id in self.owner_id:
             if ctx.message.author.id == id:
                 delta_uptime = datetime.utcnow() - self.client.launch_time
@@ -45,10 +46,17 @@ class Utilis(commands.Cog):
         if message.content == "<@!861148454294519828>":
             channel: discord.TextChannel = message.channel
             await channel.send(f"Hello, my prefix for this server is {DEFAULT_PREFIX} or <@!861148454294519828>")
-        if message.content == "hi":
-            if message.author.id == 736469707603050506:
-                await message.reply("https://cdn.discordapp.com/attachments/827102815289344014/883637783728619580/unknown.gif")
 
+    @commands.command()
+    async def invite(self, ctx: commands.Context):
+        invite_url = f"https://discord.com/api/oauth2/authorize?client_id={str(self.client.user.id)}&permissions=8&scope=bot"
+
+        invite_embed = discord.Embed(
+            title="Invite me 🥳",
+            color=self.embed_color,
+            description=f"Click [here]({invite_url}) to invite me."
+        )
+        await ctx.send(embed=invite_embed)
 
 def setup(client):
     client.add_cog(Utilis(client))

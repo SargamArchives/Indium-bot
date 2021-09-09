@@ -10,12 +10,14 @@ OWNER_ID = [ID1, ID2]
 intents = discord.Intents.all()
 
 client = commands.Bot(
-    command_prefix=commands.when_mentioned_or(DEFAULT_PREFIX), intents=intents
+    command_prefix=commands.when_mentioned_or(DEFAULT_PREFIX),
+    intents=intents,
+    case_insensitive=True,
 )
 
 extensions = [
     "cogs.utils",
-    # "cogs.error",
+    "cogs.error",
     "cogs.moderation",
     "cogs.fun",
     "cogs.misc",

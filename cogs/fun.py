@@ -1,6 +1,4 @@
-from re import split
 import discord
-from discord import embeds
 from discord.ext import commands
 
 from random import randrange

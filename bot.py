@@ -21,6 +21,7 @@ extensions = [
     "cogs.moderation",
     "cogs.fun",
     "cogs.misc",
+    "cogs.snipe",
     "jishaku",
 ]
 

@@ -3,10 +3,7 @@ from random import randrange, choice
 from typing import Optional
 
 import discord
-from discord import embeds
-from discord.channel import CategoryChannel
 from discord.ext import commands
-from discord.ext.commands.core import command
 
 from config import DEFAULT_EMBED_COLOR
 

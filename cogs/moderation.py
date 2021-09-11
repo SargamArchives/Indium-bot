@@ -1,7 +1,7 @@
+from asyncio import sleep
+
 import discord
 from discord.ext import commands
-
-from asyncio import sleep
 
 from config import DEFAULT_EMBED_COLOR
 

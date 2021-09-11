@@ -1,9 +1,10 @@
+from typing import Optional
+
 import discord
 from discord.ext import commands
 
 from config import DEFAULT_EMBED_COLOR
 
-from typing import Optional
 
 class GuildInfo(commands.Cog):
     """

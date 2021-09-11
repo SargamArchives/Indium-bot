@@ -1,10 +1,12 @@
+from datetime import datetime
+from itertools import cycle
+
 import discord
 from discord import client
 from discord.ext import commands, tasks
-from itertools import cycle
-from datetime import datetime
 
-from config import ID1, ID2, ACTIVITY_STATUS, DEFAULT_EMBED_COLOR, DEFAULT_PREFIX
+from config import (ACTIVITY_STATUS, DEFAULT_EMBED_COLOR, DEFAULT_PREFIX, ID1,
+                    ID2)
 
 
 class Utilis(commands.Cog):

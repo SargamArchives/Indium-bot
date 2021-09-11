@@ -1,9 +1,9 @@
+from typing import List
+
 import discord
 from discord.ext import commands
 
-from typing import List
-
-from config import BOT_TOKEN, ID1, ID2, DEFAULT_PREFIX
+from config import BOT_TOKEN, DEFAULT_PREFIX, ID1, ID2
 
 OWNER_ID = [ID1, ID2]
 

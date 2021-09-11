@@ -1,3 +1,6 @@
+import traceback
+from asyncio import sleep
+
 import discord
 from discord.ext import commands
 from discord.ext.commands.errors import (
@@ -9,9 +12,6 @@ from discord.ext.commands.errors import (
     MissingRole,
 )
 
-from asyncio import sleep
-import traceback
-
 from config import DEFAULT_EMBED_COLOR
 
 
@@ -22,7 +22,7 @@ class Error(commands.Cog):
 
     def __init__(self, client: commands.Bot) -> None:
         super().__init__()
-        self.client = client,
+        self.client = (client,)
         self.embed_color = DEFAULT_EMBED_COLOR
 
     @commands.Cog.listener()

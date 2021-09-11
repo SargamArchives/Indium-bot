@@ -1,9 +1,9 @@
+from datetime import date
+from random import randrange
+from typing import Optional, Union
+
 import discord
 from discord.ext import commands
-
-from random import randrange
-from datetime import date
-from typing import Optional, Union
 
 from config import DEFAULT_EMBED_COLOR
 
@@ -30,8 +30,6 @@ class Fun(commands.Cog):
             colour=self.embed_color,
         )
         await ctx.send(embed=pp_embed)
-
-    
 
 
 def setup(client):

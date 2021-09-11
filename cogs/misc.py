@@ -1,11 +1,11 @@
 import asyncio
-import discord
-from discord.ext import commands
-
-from datetime import date
 from asyncio import sleep
-from aiohttp import request, ClientSession
+from datetime import date
 from typing import Optional, Union
+
+import discord
+from aiohttp import ClientSession, request
+from discord.ext import commands
 
 from config import API_KEY, DEFAULT_EMBED_COLOR
 from utils import CountryResponse

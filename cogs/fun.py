@@ -63,7 +63,7 @@ class Fun(commands.Cog):
         else:
             caption = f"{ctx.author.mention} killed themselves! 🤔"
         kill_embed = discord.Embed(color=self.embed_color, description=caption)
-        kill_embed.set_image(url=choice(self.hug))
+        kill_embed.set_image(url=choice(self.kill))
         await ctx.send(embed=kill_embed)
 
     @commands.command()

@@ -1,9 +1,12 @@
-from datetime import date
-from random import randrange
-from typing import Optional, Union
+import json
+from random import randrange, choice
+from typing import Optional
 
 import discord
+from discord import embeds
+from discord.channel import CategoryChannel
 from discord.ext import commands
+from discord.ext.commands.core import command
 
 from config import DEFAULT_EMBED_COLOR
 
@@ -16,11 +19,16 @@ class Fun(commands.Cog):
     def __init__(self, client) -> None:
         self.client = client
         self.embed_color = DEFAULT_EMBED_COLOR
+        with open("data/gifs.json", "r") as gifs:
+            links = json.load(gifs)
+        self.hug = links["hug"]
+        self.kill = links["kill"]
+        self.pat = links["pat"]
+        self.lick = links["lick"]
 
     @commands.command()
-    async def pp(self, ctx, user: Optional[discord.Member] = None) -> None:
-        if user is None:
-            user = ctx.author
+    async def pp(self, ctx: commands.Context, user: Optional[discord.Member]) -> None:
+        user = user or ctx.author
         pp_str = ["8", "", "D"]
         pp_str[-2] = "".join(["=" for _ in range(randrange(1, 10))])
         pp_str = "".join(pp_str)
@@ -30,6 +38,46 @@ class Fun(commands.Cog):
             colour=self.embed_color,
         )
         await ctx.send(embed=pp_embed)
+
+    @commands.command()
+    async def hug(self, ctx: commands.Context, member: Optional[discord.Member]):
+        if member is not None:
+            caption = f"{ctx.author.mention} hugged {member.mention}"
+        else:
+            caption = f"{ctx.author.mention} hugged themselves! 🤔"
+        hug_embed = discord.Embed(color=self.embed_color, description=caption)
+        hug_embed.set_image(url=choice(self.hug))
+        await ctx.send(embed=hug_embed)
+
+    @commands.command()
+    async def pat(self, ctx: commands.Context, member: Optional[discord.Member]):
+        if member is not None:
+            caption = f"{ctx.author.mention} patted {member.mention}"
+        else:
+            caption = f"{ctx.author.mention} patted themselves! 🤔"
+        pat_embed = discord.Embed(color=self.embed_color, description=caption)
+        pat_embed.set_image(url=choice(self.pat))
+        await ctx.send(embed=pat_embed)
+
+    @commands.command()
+    async def kill(self, ctx: commands.Context, member: Optional[discord.Member]):
+        if member is not None:
+            caption = f"{ctx.author.mention} killed {member.mention}! RIP"
+        else:
+            caption = f"{ctx.author.mention} killed themselves! 🤔"
+        kill_embed = discord.Embed(color=self.embed_color, description=caption)
+        kill_embed.set_image(url=choice(self.hug))
+        await ctx.send(embed=kill_embed)
+
+    @commands.command()
+    async def lick(self, ctx: commands.Context, member: Optional[discord.Member]):
+        if member is not None:
+            caption = f"{ctx.author.mention} licked {member.mention}"
+        else:
+            caption = f"{ctx.author.mention} licked themselves! 🤔"
+        lick_embed = discord.Embed(color=self.embed_color, description=caption)
+        lick_embed.set_image(url=choice(self.lick))
+        await ctx.send(embed=lick_embed)
 
 
 def setup(client):

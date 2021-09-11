@@ -1,12 +1,11 @@
 import asyncio
 import discord
-from discord.embeds import Embed
 from discord.ext import commands
 
 from datetime import date
 from asyncio import sleep
 from aiohttp import request, ClientSession
-from typing import Optional
+from typing import Optional, Union
 
 from config import API_KEY, DEFAULT_EMBED_COLOR
 from utils import CountryResponse
@@ -232,6 +231,30 @@ class Miscellaneous(commands.Cog):
                 m = await ctx.send(request_data["message"])
                 asyncio.sleep(5)
                 await m.delete()
+
+    
+    @commands.command()
+    async def device(
+        self,
+        ctx: commands.Context,
+        user: Optional[Union[discord.Member, discord.User]] = None,
+    ) -> None:
+        if user is None:
+            user = ctx.author
+        comp_status = user.desktop_status
+        mobile_status = user.mobile_status
+        web_status = user.web_status
+
+        embed = discord.Embed(
+            title=f"{user.display_name}'s device status", colour=self.embed_color
+        )
+        embed.add_field(name="PC client", value=f"💻: {comp_status}", inline=True)
+        embed.add_field(name="Web client", value=f"🌏: {web_status}", inline=False)
+        embed.add_field(name="Mobile client", value=f"📱: {mobile_status}", inline=False)
+
+        embed.set_thumbnail(url=user.avatar_url)
+        await ctx.send(embed=embed)
+
 
 def setup(client):
     client.add_cog(Miscellaneous(client))

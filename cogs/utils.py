@@ -1,4 +1,5 @@
 import discord
+from discord import client
 from discord.ext import commands, tasks
 from itertools import cycle
 from datetime import datetime
@@ -22,6 +23,8 @@ class Utilis(commands.Cog):
     async def on_ready(self):
         self.change_status.start()
         print("Logged in as bot")
+        channel = await self.client.fetch_channel(885819826755489802)
+        await channel.send(f"Logged in as {self.client.user.mention}")
 
     @tasks.loop(seconds=10)
     async def change_status(self):

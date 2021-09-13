@@ -1,5 +1,5 @@
 import json
-from random import randrange, choice
+from random import choice, randrange
 from typing import Optional
 
 import discord

@@ -1,9 +1,7 @@
 from asyncio import sleep
 
 import discord
-from discord import embeds
 from discord.ext import commands
-from discord.ext.commands.core import command
 
 from config import DEFAULT_EMBED_COLOR
 

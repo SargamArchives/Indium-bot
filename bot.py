@@ -3,7 +3,7 @@ from typing import List
 import discord
 from discord.ext import commands
 
-from config import BOT_TOKEN, DEFAULT_PREFIX, ID1, ID2
+from Config.config import BOT_TOKEN, DEFAULT_PREFIX, ID1, ID2
 
 OWNER_ID = [ID1, ID2]
 
@@ -18,7 +18,7 @@ client = commands.Bot(
 extensions = [
     "cogs.utils",
     "cogs.guild",
-    # "cogs.error",
+    "cogs.error",
     "cogs.moderation",
     "cogs.emoji",
     "cogs.fun",

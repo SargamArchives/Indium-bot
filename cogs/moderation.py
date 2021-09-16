@@ -3,7 +3,7 @@ from asyncio import sleep
 import discord
 from discord.ext import commands
 
-from config import DEFAULT_EMBED_COLOR
+from Config.config import DEFAULT_EMBED_COLOR
 
 
 class Moderation(commands.Cog):

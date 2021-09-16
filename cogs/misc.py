@@ -7,8 +7,8 @@ import discord
 from aiohttp import ClientSession, request
 from discord.ext import commands
 
-from config import API_KEY, DEFAULT_EMBED_COLOR
-from utils import CountryResponse
+from Config.config import API_KEY, DEFAULT_EMBED_COLOR
+from Utils.utils import CountryResponse
 
 
 class Miscellaneous(commands.Cog):
@@ -44,13 +44,17 @@ class Miscellaneous(commands.Cog):
     # TODO Fix this thing someday
 
     @commands.command()
-    async def weather(self, ctx, name: str = "nepal"):
+    async def weather(self, ctx: commands.Context, name: Optional[str]):
+        name = name or None
+        if name is None:
+            await ctx.send("Please provide name of country")
+            return
         URL = f"https://api.openweathermap.org/data/2.5/weather?q={name}&appid={API_KEY}&units=metric"
 
         async with request("GET", URL) as response:
             if response.status == 200:
                 data = await response.json()
-
+                # Assigning the response to proper variables
                 weather_data = data["weather"]
                 wind_data = data["wind"]
                 status = weather_data[0]["main"]
@@ -72,6 +76,8 @@ class Miscellaneous(commands.Cog):
                 )
                 await ctx.send(embed=weather)
             else:
+                data = await response.json()
+                print(data)
                 weather_fail_embed = self.embed
                 weather_fail_embed.title = "Oh no"
                 weather_fail_embed.description = (
@@ -232,7 +238,6 @@ class Miscellaneous(commands.Cog):
                 asyncio.sleep(5)
                 await m.delete()
 
-    
     @commands.command()
     async def device(
         self,

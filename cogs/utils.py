@@ -5,7 +5,7 @@ import discord
 from discord import client
 from discord.ext import commands, tasks
 
-from config import (ACTIVITY_STATUS, DEFAULT_EMBED_COLOR, DEFAULT_PREFIX, ID1,
+from Config.config import (ACTIVITY_STATUS, DEFAULT_EMBED_COLOR, DEFAULT_PREFIX, ID1,
                     ID2)
 
 

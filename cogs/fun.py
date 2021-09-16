@@ -5,7 +5,7 @@ from typing import Optional
 import discord
 from discord.ext import commands
 
-from config import DEFAULT_EMBED_COLOR
+from Config.config import DEFAULT_EMBED_COLOR
 
 
 class Fun(commands.Cog):
@@ -16,7 +16,7 @@ class Fun(commands.Cog):
     def __init__(self, client) -> None:
         self.client = client
         self.embed_color = DEFAULT_EMBED_COLOR
-        with open("data/gifs.json", "r") as gifs:
+        with open("Utils/data/gifs.json", "r") as gifs:
             links = json.load(gifs)
         self.hug = links["hug"]
         self.kill = links["kill"]

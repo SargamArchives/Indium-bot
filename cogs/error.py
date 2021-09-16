@@ -12,7 +12,7 @@ from discord.ext.commands.errors import (
     MissingRole,
 )
 
-from config import DEFAULT_EMBED_COLOR
+from Config.config import DEFAULT_EMBED_COLOR
 
 
 class Error(commands.Cog):

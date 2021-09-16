@@ -9,3 +9,5 @@ Pipfile.lock
 /__pycache__
 
 /cogs/__pycache__
+Config/__pycache__
+Utils/__pycache__

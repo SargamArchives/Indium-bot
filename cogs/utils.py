@@ -5,8 +5,7 @@ import discord
 from discord import client
 from discord.ext import commands, tasks
 
-from Config.config import (ACTIVITY_STATUS, DEFAULT_EMBED_COLOR, DEFAULT_PREFIX, ID1,
-                    ID2)
+from Config.config import ACTIVITY_STATUS, DEFAULT_EMBED_COLOR, DEFAULT_PREFIX, ID1, ID2
 
 
 class Utilis(commands.Cog):

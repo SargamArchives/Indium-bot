@@ -32,7 +32,7 @@ class Emoji(commands.Cog):
                             embed = discord.Embed(
                                 title="Successfully created emoji",
                                 description=f"<:{name}:{emoji.id}>",
-                                color=self.embed_color
+                                color=self.embed_color,
                             )
                             await ctx.send(embed=embed)
                             await ses.close()

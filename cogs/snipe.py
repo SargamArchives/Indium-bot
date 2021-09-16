@@ -16,11 +16,11 @@ class Snipe(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message_delete(self, message: discord.Message):
-        if message.author.bot: 
+        if message.author.bot:
             return
         print(message.content)
         self.snipable_message[message.channel.id] = message
-        
+
         await sleep(120)
         del self.snipable_message[message.channel.id]
 
@@ -30,12 +30,10 @@ class Snipe(commands.Cog):
         self.edited_message[channel_id] = [before, after]
         await sleep(120)
         del self.edited_message[channel_id]
-        
+
     @commands.command()
     async def edit(self, ctx: commands.Context):
-        edit_embed = discord.Embed(
-            color=self.embed_color
-        )
+        edit_embed = discord.Embed(color=self.embed_color)
         try:
             messages = self.edited_message[ctx.channel.id]
         except KeyError:
@@ -44,8 +42,13 @@ class Snipe(commands.Cog):
             return
         before, after = messages
         author: discord.Member = messages[0].author
-        edit_embed.set_author(name=f"{author.display_name}#{author.discriminator}", icon_url=author.avatar_url)
-        edit_embed.add_field(name=f"Message Edited\n\nBefore:", value=before.content, inline=False)
+        edit_embed.set_author(
+            name=f"{author.display_name}#{author.discriminator}",
+            icon_url=author.avatar_url,
+        )
+        edit_embed.add_field(
+            name=f"Message Edited\n\nBefore:", value=before.content, inline=False
+        )
         edit_embed.add_field(name=f"After:", value=after.content, inline=False)
         await ctx.send(embed=edit_embed)
 
@@ -57,11 +60,16 @@ class Snipe(commands.Cog):
         try:
             message: discord.Message = self.snipable_message[ctx.channel.id]
         except KeyError:
-            snipe_embed.add_field(name="Message Deleted", value="There's nothing to snipe!")
+            snipe_embed.add_field(
+                name="Message Deleted", value="There's nothing to snipe!"
+            )
             await ctx.send(embed=snipe_embed)
             return
         member: discord.Member = message.author
-        snipe_embed.set_author(name=f"{message.author.display_name}#{message.author.discriminator}", icon_url=f"{member.avatar_url}")
+        snipe_embed.set_author(
+            name=f"{message.author.display_name}#{message.author.discriminator}",
+            icon_url=f"{member.avatar_url}",
+        )
         snipe_embed.add_field(name="Message Deleted", value=f"{message.content}")
         await ctx.send(embed=snipe_embed)
 

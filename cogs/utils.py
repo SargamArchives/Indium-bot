@@ -14,7 +14,6 @@ class Utilis(commands.Cog):
 
     def __init__(self, client: discord.Client):
         self.client = client
-        self.status = cycle(ACTIVITY_STATUS)
         client.launch_time = datetime.utcnow()
         self.owner_id = [ID1, ID2]
         self.embed_color = DEFAULT_EMBED_COLOR

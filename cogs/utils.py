@@ -1,8 +1,7 @@
 from datetime import datetime
-from itertools import cycle
 
 import discord
-from discord.ext import commands, tasks
+from discord.ext import commands
 
 from Config.config import (ACTIVITY_STATUS, DEFAULT_EMBED_COLOR,
                            DEFAULT_PREFIX, ID1, ID2)

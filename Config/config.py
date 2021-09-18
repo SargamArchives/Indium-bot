@@ -13,3 +13,5 @@ ID2 = int(os.environ.get("ID2"))
 DEFAULT_PREFIX = ">"
 ACTIVITY_STATUS = [f"prefix: {DEFAULT_PREFIX}", "your activity"]
 DEFAULT_EMBED_COLOR = 0x01A6FF
+BOT_OWNER = "Sargam"
+BOT_NAME = "Indium"

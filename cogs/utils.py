@@ -3,8 +3,7 @@ from datetime import datetime
 import discord
 from discord.ext import commands
 
-from Config.config import (ACTIVITY_STATUS, DEFAULT_EMBED_COLOR,
-                           DEFAULT_PREFIX, ID1, ID2)
+from Config.config import DEFAULT_EMBED_COLOR, DEFAULT_PREFIX, ID1, ID2
 
 
 class Utilis(commands.Cog):

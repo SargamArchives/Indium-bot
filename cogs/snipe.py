@@ -15,7 +15,7 @@ class Snipe(commands.Cog):
         self.edited_message = {}
 
     @commands.Cog.listener()
-    async def on_message_delete(self, message: discord.Message):
+    async def on_message_delete(self, message: discord.Message) -> None:
         if message.author.bot:
             return
         print(message.content)
@@ -25,14 +25,14 @@ class Snipe(commands.Cog):
         del self.snipable_message[message.channel.id]
 
     @commands.Cog.listener()
-    async def on_message_edit(self, before: discord.Message, after: discord.Message):
+    async def on_message_edit(self, before: discord.Message, after: discord.Message) -> None:
         channel_id = before.channel.id
         self.edited_message[channel_id] = [before, after]
         await sleep(120)
         del self.edited_message[channel_id]
 
     @commands.command()
-    async def edit(self, ctx: commands.Context):
+    async def edit(self, ctx: commands.Context) -> None:
         edit_embed = discord.Embed(color=self.embed_color)
         try:
             messages = self.edited_message[ctx.channel.id]
@@ -53,7 +53,7 @@ class Snipe(commands.Cog):
         await ctx.send(embed=edit_embed)
 
     @commands.command()
-    async def snipe(self, ctx: commands.Context):
+    async def snipe(self, ctx: commands.Context) -> None:
         snipe_embed = discord.Embed(
             color=self.embed_color,
         )

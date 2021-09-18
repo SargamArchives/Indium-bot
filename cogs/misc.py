@@ -7,7 +7,7 @@ import discord
 from aiohttp import ClientSession, request
 from discord.ext import commands
 
-from Config.config import API_KEY, DEFAULT_EMBED_COLOR
+from Config.config import API_KEY, BOT_NAME, BOT_OWNER, DEFAULT_EMBED_COLOR
 from Utils.utils import CountryResponse
 
 
@@ -20,6 +20,8 @@ class Miscellaneous(commands.Cog):
         self.client = client
         self.embed_color = DEFAULT_EMBED_COLOR
         self.embed = discord.Embed(colour=self.embed_color)
+        self.bot_name = BOT_NAME
+        self.bot_owner = BOT_OWNER
 
     @commands.command()
     async def ping(self, ctx):
@@ -259,6 +261,16 @@ class Miscellaneous(commands.Cog):
 
         embed.set_thumbnail(url=user.avatar_url)
         await ctx.send(embed=embed)
+
+    @commands.command()
+    async def speak(self, ctx: commands.Context, *, query: Optional[str]) -> None:
+        if query is None:
+            return
+        URL = f"https://api.affiliateplus.xyz/api/chatbot?message={query}&botname={self.bot_name}&ownername={self.bot_owner}"
+        async with request("GET", url=URL) as response:
+            if response.status == 200:
+                response = await response.json()
+                await ctx.send(response["message"])
 
 
 def setup(client):

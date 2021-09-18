@@ -19,7 +19,7 @@ class Moderation(commands.Cog):
         user: discord.Member,
         *,
         reason="No reason provided",
-    ):
+    ) -> None:
 
         await user.kick(reason=reason)
         kick = discord.Embed(
@@ -39,7 +39,7 @@ class Moderation(commands.Cog):
         user: discord.Member,
         *,
         reason: str = "No reason Provided",
-    ):
+    ) -> None:
 
         await user.ban(reason=reason)
         ban = discord.Embed(
@@ -54,7 +54,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
-    async def purge(self, ctx: commands.Context, amount: int):
+    async def purge(self, ctx: commands.Context, amount: int) -> None:
         if amount < 1:
             return
         await ctx.channel.purge(limit=amount + 1)

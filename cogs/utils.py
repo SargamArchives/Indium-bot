@@ -2,10 +2,10 @@ from datetime import datetime
 from itertools import cycle
 
 import discord
-from discord import client
 from discord.ext import commands, tasks
 
-from Config.config import ACTIVITY_STATUS, DEFAULT_EMBED_COLOR, DEFAULT_PREFIX, ID1, ID2
+from Config.config import (ACTIVITY_STATUS, DEFAULT_EMBED_COLOR,
+                           DEFAULT_PREFIX, ID1, ID2)
 
 
 class Utilis(commands.Cog):
@@ -20,22 +20,8 @@ class Utilis(commands.Cog):
         self.owner_id = [ID1, ID2]
         self.embed_color = DEFAULT_EMBED_COLOR
 
-    @commands.Cog.listener()
-    async def on_ready(self):
-        self.change_status.start()
-        print("Logged in as bot")
-        channel = await self.client.fetch_channel(885819826755489802)
-        await channel.send(f"Logged in as {self.client.user.mention}")
-
-    @tasks.loop(seconds=10)
-    async def change_status(self):
-        activity = discord.Activity(
-            type=discord.ActivityType.watching, name=next(self.status)
-        )
-        await self.client.change_presence(activity=activity)
-
     @commands.command()
-    async def uptime(self, ctx: commands.Context):
+    async def uptime(self, ctx: commands.Context) -> None:
         for id in self.owner_id:
             if ctx.message.author.id == id:
                 delta_uptime = datetime.utcnow() - self.client.launch_time
@@ -49,7 +35,7 @@ class Utilis(commands.Cog):
                 await ctx.send(embed=uptime_embed)
 
     @commands.Cog.listener()
-    async def on_message(self, message: discord.Message):
+    async def on_message(self, message: discord.Message) -> None:
         if message.content == f"<@!{self.client.user.id}>":
             channel: discord.TextChannel = message.channel
             await channel.send(
@@ -59,7 +45,6 @@ class Utilis(commands.Cog):
     @commands.command()
     async def invite(self, ctx: commands.Context):
         invite_url = f"https://discord.com/api/oauth2/authorize?client_id={str(self.client.user.id)}&permissions=8&scope=bot"
-
         invite_embed = discord.Embed(
             title="Invite me 🥳",
             color=self.embed_color,

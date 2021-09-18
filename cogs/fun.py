@@ -37,7 +37,9 @@ class Fun(commands.Cog):
         await ctx.send(embed=pp_embed)
 
     @commands.command()
-    async def hug(self, ctx: commands.Context, member: Optional[discord.Member]):
+    async def hug(
+        self, ctx: commands.Context, member: Optional[discord.Member]
+    ) -> None:
         if member is not None:
             caption = f"{ctx.author.mention} hugged {member.mention}"
         else:
@@ -47,7 +49,9 @@ class Fun(commands.Cog):
         await ctx.send(embed=hug_embed)
 
     @commands.command()
-    async def pat(self, ctx: commands.Context, member: Optional[discord.Member]):
+    async def pat(
+        self, ctx: commands.Context, member: Optional[discord.Member]
+    ) -> None:
         if member is not None:
             caption = f"{ctx.author.mention} patted {member.mention}"
         else:
@@ -57,7 +61,9 @@ class Fun(commands.Cog):
         await ctx.send(embed=pat_embed)
 
     @commands.command()
-    async def kill(self, ctx: commands.Context, member: Optional[discord.Member]):
+    async def kill(
+        self, ctx: commands.Context, member: Optional[discord.Member]
+    ) -> None:
         if member is not None:
             caption = f"{ctx.author.mention} killed {member.mention}! RIP"
         else:
@@ -67,7 +73,9 @@ class Fun(commands.Cog):
         await ctx.send(embed=kill_embed)
 
     @commands.command()
-    async def lick(self, ctx: commands.Context, member: Optional[discord.Member]):
+    async def lick(
+        self, ctx: commands.Context, member: Optional[discord.Member]
+    ) -> None:
         if member is not None:
             caption = f"{ctx.author.mention} licked {member.mention}"
         else:

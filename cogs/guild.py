@@ -17,7 +17,9 @@ class GuildInfo(commands.Cog):
         self.embed_color = DEFAULT_EMBED_COLOR
 
     @commands.command(name="whois")
-    async def who_is(self, ctx: commands.Context, member: Optional[discord.Member]):
+    async def who_is(
+        self, ctx: commands.Context, member: Optional[discord.Member]
+    ) -> None:
         user = member or ctx.author
         permissions_filter = [
             "Administrator",
@@ -69,7 +71,7 @@ class GuildInfo(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command(name="serverinfo")
-    async def server_info(self, ctx: commands.Context):
+    async def server_info(self, ctx: commands.Context) -> None:
         guild: discord.Guild = ctx.guild
         name = guild.name
         owner = guild.owner

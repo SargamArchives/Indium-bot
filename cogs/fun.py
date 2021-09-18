@@ -72,7 +72,7 @@ class Fun(commands.Cog):
         kill_embed.set_image(url=choice(self.kill))
         await ctx.send(embed=kill_embed)
 
-    @commands.command()
+    @commands.command(help="Licks")
     async def lick(
         self, ctx: commands.Context, member: Optional[discord.Member]
     ) -> None:

@@ -5,8 +5,7 @@ import discord
 from discord.ext import commands, tasks
 
 from Config.config import ACTIVITY_STATUS, DEFAULT_PREFIX
-
-
+from Utils.help_command import HelpCommand
 class IndiumBot(commands.Bot):
     def __init__(self, load_jishaku: Optional[bool] = True):
         super().__init__(
@@ -25,6 +24,7 @@ class IndiumBot(commands.Bot):
             "cogs.fun",
             "cogs.misc",
             "cogs.snipe",
+            "dch"
         ]
         if load_jishaku:
             self._extensions.append("jishaku")

@@ -2,11 +2,12 @@ from itertools import cycle
 from typing import Optional
 
 import discord
-from discord import client
 from discord.ext import commands, tasks
 
 from Config.config import ACTIVITY_STATUS, DEFAULT_PREFIX
 from Utils.help_command import HelpCommand
+
+
 class IndiumBot(commands.Bot):
     def __init__(self, load_jishaku: Optional[bool] = True):
         super().__init__(
@@ -25,12 +26,12 @@ class IndiumBot(commands.Bot):
             "cogs.fun",
             "cogs.misc",
             "cogs.snipe",
-            "dch"
+            "dch",
         ]
         if load_jishaku:
             self._extensions.append("jishaku")
         self._status = cycle(ACTIVITY_STATUS)
-        self._load_extension() 
+        self._load_extension()
 
     def return_prefix(self) -> None:
         return commands.when_mentioned_or(DEFAULT_PREFIX)

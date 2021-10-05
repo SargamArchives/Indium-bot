@@ -3,9 +3,14 @@ from asyncio import sleep
 
 import discord
 from discord.ext import commands
-from discord.ext.commands.errors import (BadArgument, BotMissingPermissions,
-                                         CommandNotFound, MissingPermissions,
-                                         MissingRequiredArgument, MissingRole)
+from discord.ext.commands.errors import (
+    BadArgument,
+    BotMissingPermissions,
+    CommandNotFound,
+    MissingPermissions,
+    MissingRequiredArgument,
+    MissingRole,
+)
 
 from Config.config import DEFAULT_EMBED_COLOR
 
@@ -52,7 +57,9 @@ class Error(commands.Cog):
             await ctx.send(embed=error_embed)
 
         if isinstance(error, MissingRole):
-            await ctx.send("❎ You are missing role permissions good sir.", delete_after= 5)
+            await ctx.send(
+                "❎ You are missing role permissions good sir.", delete_after=5
+            )
 
         else:
             await ctx.send("An unknown error occured.", delete_after=5.0)

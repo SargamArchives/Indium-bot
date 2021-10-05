@@ -25,7 +25,9 @@ class Snipe(commands.Cog):
         del self.snipable_message[message.channel.id]
 
     @commands.Cog.listener()
-    async def on_message_edit(self, before: discord.Message, after: discord.Message) -> None:
+    async def on_message_edit(
+        self, before: discord.Message, after: discord.Message
+    ) -> None:
         channel_id = before.channel.id
         self.edited_message[channel_id] = [before, after]
         await sleep(120)

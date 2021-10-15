@@ -15,3 +15,4 @@ ACTIVITY_STATUS = [f"prefix: {DEFAULT_PREFIX}", "your activity"]
 DEFAULT_EMBED_COLOR = 0x01A6FF
 BOT_OWNER = "Sargam"
 BOT_NAME = "Indium"
+OWNER_ID = [ID1, ID2]

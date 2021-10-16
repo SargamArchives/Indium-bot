@@ -7,6 +7,7 @@ from Config.config import DEFAULT_EMBED_COLOR
 
 
 class Snipe(commands.Cog):
+    """Cog that takes care of stuff that is related to sniped and edited messages"""
     def __init__(self, client) -> None:
         super().__init__()
         self.client = client

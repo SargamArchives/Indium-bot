@@ -1,5 +1,6 @@
 from itertools import cycle
 from typing import Optional
+import logging
 
 import discord
 from discord.ext import commands, tasks
@@ -49,4 +50,4 @@ class IndiumBot(commands.Bot):
 
     async def on_ready(self):
         self.change_status.start()
-        print(f"Logged in as ")
+        print(f"Logged in as {self.user.name}#{self.user.discriminator}")

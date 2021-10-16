@@ -1,6 +1,6 @@
+import logging
 from itertools import cycle
 from typing import Optional
-import logging
 
 import discord
 from discord.ext import commands, tasks

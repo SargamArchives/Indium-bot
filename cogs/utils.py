@@ -3,7 +3,8 @@ from datetime import datetime
 import discord
 from discord.ext import commands
 
-from Config.config import DEFAULT_EMBED_COLOR, DEFAULT_PREFIX, ID1, ID2
+from Config.config import DEFAULT_EMBED_COLOR, DEFAULT_PREFIX
+from Utils.helpers.helper import check_owner
 
 
 class Utilis(commands.Cog):
@@ -14,22 +15,20 @@ class Utilis(commands.Cog):
     def __init__(self, client: discord.Client):
         self.client = client
         client.launch_time = datetime.utcnow()
-        self.owner_id = [ID1, ID2]
         self.embed_color = DEFAULT_EMBED_COLOR
 
     @commands.command()
+    @commands.check(check_owner)
     async def uptime(self, ctx: commands.Context) -> None:
-        for id in self.owner_id:
-            if ctx.message.author.id == id:
-                delta_uptime = datetime.utcnow() - self.client.launch_time
-                hours, remainder = divmod(int(delta_uptime.total_seconds()), 3600)
-                minutes, seconds = divmod(remainder, 60)
-                days, hours = divmod(hours, 24)
-                uptime_embed = discord.Embed(
-                    title=f"Online since: {days}d, {hours}h, {minutes}m, {seconds}s",
-                    colour=self.embed_color,
-                )
-                await ctx.send(embed=uptime_embed)
+        delta_uptime = datetime.utcnow() - self.client.launch_time
+        hours, remainder = divmod(int(delta_uptime.total_seconds()), 3600)
+        minutes, seconds = divmod(remainder, 60)
+        days, hours = divmod(hours, 24)
+        uptime_embed = discord.Embed(
+            title=f"Online since: {days}d, {hours}h, {minutes}m, {seconds}s",
+            colour=self.embed_color,
+        )
+        await ctx.send(embed=uptime_embed)
 
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message) -> None:

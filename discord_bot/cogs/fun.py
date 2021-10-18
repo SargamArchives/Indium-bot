@@ -16,7 +16,7 @@ class Fun(commands.Cog):
     def __init__(self, client) -> None:
         self.client = client
         self.embed_color = DEFAULT_EMBED_COLOR
-        with open("Utils/data/gifs.json", "r") as gifs:
+        with open("discord_bot/Utils/data/gifs.json", "r") as gifs:
             links = json.load(gifs)
         self.hug = links["hug"]
         self.kill = links["kill"]

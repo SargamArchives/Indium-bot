@@ -2,12 +2,11 @@ import traceback
 from asyncio import sleep
 
 import discord
+from Config.config import DEFAULT_EMBED_COLOR
 from discord.ext import commands
 from discord.ext.commands.errors import (BadArgument, BotMissingPermissions,
                                          CommandNotFound, MissingPermissions,
                                          MissingRequiredArgument, MissingRole)
-
-from Config.config import DEFAULT_EMBED_COLOR
 
 
 class Error(commands.Cog):

@@ -3,9 +3,8 @@ from itertools import cycle
 from typing import Optional
 
 import discord
-from discord.ext import commands, tasks
-
 from Config.config import ACTIVITY_STATUS, DEFAULT_PREFIX
+from discord.ext import commands, tasks
 from Utils.help_command import HelpCommand
 
 

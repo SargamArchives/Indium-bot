@@ -7,3 +7,5 @@ Pipfile.lock
 
 #pycache
 __pycache__/
+
+.vscode/

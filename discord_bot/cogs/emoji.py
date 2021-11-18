@@ -2,10 +2,9 @@ from io import BytesIO
 
 import aiohttp
 import discord
+from Config.config import DEFAULT_EMBED_COLOR
 from discord.ext import commands
 from discord.ext.commands.core import command
-
-from Config.config import DEFAULT_EMBED_COLOR
 
 
 class Emoji(commands.Cog):

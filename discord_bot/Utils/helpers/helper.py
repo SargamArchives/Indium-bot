@@ -1,6 +1,5 @@
-from discord.ext.commands.errors import NotOwner
-
 from Config.config import OWNER_ID
+from discord.ext.commands.errors import NotOwner
 
 
 def check_owner(ctx):

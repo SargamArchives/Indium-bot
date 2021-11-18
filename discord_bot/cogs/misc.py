@@ -5,9 +5,8 @@ from typing import Optional, Union
 
 import discord
 from aiohttp import ClientSession, request
-from discord.ext import commands
-
 from Config.config import API_KEY, BOT_NAME, BOT_OWNER, DEFAULT_EMBED_COLOR
+from discord.ext import commands
 from Utils.utils import CountryResponse
 
 

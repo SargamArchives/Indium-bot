@@ -3,9 +3,8 @@ from random import choice, randrange
 from typing import Optional
 
 import discord
-from discord.ext import commands
-
 from Config.config import DEFAULT_EMBED_COLOR
+from discord.ext import commands
 
 
 class Fun(commands.Cog):
